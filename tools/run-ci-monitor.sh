@@ -35,13 +35,4 @@ if $failed ; then
 fi
 
 # Give one more chance to restart quickly when start failed at the first time
-for try in $(seq 2) ; do
-	failed=false
-	$DPDK_CI/tools/$prog -p 5 || failed=true
-	if ! $failed ; then
-		break
-	fi
-	if monitor_is_running ; then
-		break
-	fi
-done
+$DPDK_CI/tools/$prog -p 1

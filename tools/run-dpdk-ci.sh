@@ -30,9 +30,4 @@ if $failed ; then
 fi
 
 # Give two chances to restart quickly when start failed at the first time
-for try in $(seq 3) ; do
-	$DPDK_CI/tools/$prog $DPDK_CI/last.txt || failed=true
-	if ci_is_running ; then
-		break
-	fi
-done
+$DPDK_CI/tools/$prog $DPDK_CI/last.txt
