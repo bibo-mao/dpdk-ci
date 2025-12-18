@@ -96,7 +96,6 @@ send_series_test_report() {
 		exit 1
 	fi
 
-	#from="zhoumin@loongson.cn"
 	echo "send test report for series $series_id to $from"
 	$send_series_report -t "$subject" -f "$from" -m "$msgid" -p "$target_pwid" \
 		-r "$pwids" -o "$listid" -l "$label" \
