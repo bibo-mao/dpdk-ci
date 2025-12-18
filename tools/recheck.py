@@ -30,7 +30,10 @@ def get_recheck_time(path):
     if len(last) == 0:
         return rt_str
 
-    tmp = datetime.strptime(last, "%Y-%m-%dT%H:%M:%S")
+    try:
+        tmp = datetime.strptime(last, "%Y-%m-%dT%H:%M:%S.%f")
+    except ValueError:
+        tmp = datetime.strptime(last, "%Y-%m-%dT%H:%M:%S")
     if now - tmp > timedelta(hours=12):
         return rt_str
 
@@ -47,7 +50,7 @@ def set_recheck_time(path, rt_str):
 def save_recheck_time(path, rechecks):
     last_ts = rechecks['last_comment_timestamp']
     if last_ts != None:
-        set_recheck_time(path, last_ts.split('.')[0])
+        set_recheck_time(path, last_ts)
 
 def get_retest_times(path, sid, last_ts):
     times = 1
